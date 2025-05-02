@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>extension-icon-64x64-outline</title>
+    <g id="extension-icon-64x64-outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#000000" cx="18" cy="19" r="3"></circle>
+        <rect id="Rectangle" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="64" height="64" rx="16"></rect>
+        <circle id="Oval" fill="#000000" cx="18" cy="20" r="3"></circle>
+        <path d="M46,17 C47.6568542,17 49,18.3431458 49,20 C49,21.6568542 47.6568542,23 46,23 L29,23 C27.3431458,23 26,21.6568542 26,20 C26,18.3431458 27.3431458,17 29,17 L46,17 Z" id="Path" fill="#000000" fill-rule="nonzero"></path>
+        <path d="M46,29 C47.6568542,29 49,30.3431458 49,32 C49,33.6568542 47.6568542,35 46,35 L18,35 C16.3431458,35 15,33.6568542 15,32 C15,30.3431458 16.3431458,29 18,29 L46,29 Z" id="Path-Copy" fill="#000000" fill-rule="nonzero"></path>
+        <path d="M40,41 C41.6568542,41 43,42.3431458 43,44 C43,45.6568542 41.6568542,47 40,47 L18,47 C16.3431458,47 15,45.6568542 15,44 C15,42.3431458 16.3431458,41 18,41 L40,41 Z" id="Path-Copy-2" fill="#000000" fill-rule="nonzero"></path>
+    </g>
+</svg>
