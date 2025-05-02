@@ -69,9 +69,6 @@ export const createConfigScreen = (settings: Settings, onClose: () => void): HTM
         case SETTINGS_KEYS.SERVICE:
           settings.service = newValue as Settings['service'];
           break;
-        case SETTINGS_KEYS.MODEL:
-          settings.model = newValue as string;
-          break;
         case SETTINGS_KEYS.BUTTON_POSITION:
           settings.buttonPosition = newValue as string;
           break;
@@ -92,10 +89,6 @@ export const createConfigScreen = (settings: Settings, onClose: () => void): HTM
           break;
         case 'service':
           settingKey = SETTINGS_KEYS.SERVICE;
-          newValue = item.key as string;
-          break;
-        case 'model':
-          settingKey = SETTINGS_KEYS.MODEL;
           newValue = item.key as string;
           break;
         case 'newtab':

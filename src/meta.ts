@@ -17,7 +17,6 @@ const baseConfig = {
     'GM.deleteValue',
     'GM.listValues',
   ],
-  connect: ['api.openai.com', 'generativelanguage.googleapis.com', 'claude.ai', 'grok.x.ai'],
   require: [
     'https://cdnjs.cloudflare.com/ajax/libs/readability/0.6.0/Readability.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/readability/0.6.0/Readability-readerable.min.js',

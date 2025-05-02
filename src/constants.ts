@@ -28,7 +28,6 @@ export const SETTINGS_KEYS = {
   THEME: 'glancebrief_theme',
   SERVICE: 'glancebrief_service',
   PROMPT: 'glancebrief_prompt',
-  MODEL: 'glancebrief_model',
   TEMP_PROMPT: 'glancebrief_temp_prompt',
   PENDING_SUMMARIZE: 'glancebrief_pending_summarize',
   LAST_PROMPT_TIME: 'glancebrief_last_prompt_time',
@@ -53,7 +52,6 @@ export const BUTTON_POSITIONS = {
 export const DEFAULT_SETTINGS = {
   theme: 'system',
   service: 'openai',
-  model: 'gpt-4o-mini',
   prompt: DEFAULT_PROMPT,
   newtab: true,
   buttonPosition: BUTTON_POSITIONS.BOTTOM_RIGHT,

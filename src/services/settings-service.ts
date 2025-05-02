@@ -12,7 +12,6 @@ import { applyTheme } from '@/utils';
 const activeSettings: Settings = {
   theme: DEFAULT_SETTINGS.theme as Settings['theme'],
   service: DEFAULT_SETTINGS.service as Settings['service'],
-  model: DEFAULT_SETTINGS.model,
   prompt: DEFAULT_SETTINGS.prompt,
   newtab: DEFAULT_SETTINGS.newtab,
   buttonPosition: DEFAULT_SETTINGS.buttonPosition,
@@ -35,9 +34,6 @@ export const saveSetting = async (key: string, value: string | boolean | object)
         break;
       case SETTINGS_KEYS.SERVICE:
         activeSettings.service = value as Settings['service'];
-        break;
-      case SETTINGS_KEYS.MODEL:
-        activeSettings.model = value as string;
         break;
       case SETTINGS_KEYS.PROMPT:
         activeSettings.prompt = value as string;
@@ -75,10 +71,6 @@ export const loadSettings = async (): Promise<Settings> => {
     )) as Settings['service'];
     activeSettings.service = savedService;
 
-    /** Load model */
-    const savedModel = await GM.getValue(SETTINGS_KEYS.MODEL, DEFAULT_SETTINGS.model);
-    activeSettings.model = savedModel as string;
-
     /** Load new tab setting */
     const savedNewTab = (await GM.getValue(
       SETTINGS_KEYS.NEWTAB,
@@ -105,7 +97,6 @@ export const loadSettings = async (): Promise<Settings> => {
     return {
       theme: DEFAULT_SETTINGS.theme as Settings['theme'],
       service: DEFAULT_SETTINGS.service as Settings['service'],
-      model: DEFAULT_SETTINGS.model,
       prompt: DEFAULT_SETTINGS.prompt,
       newtab: DEFAULT_SETTINGS.newtab,
       buttonPosition: DEFAULT_SETTINGS.buttonPosition,

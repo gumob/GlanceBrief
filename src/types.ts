@@ -15,7 +15,6 @@ export interface ArticleData {
 export interface Settings {
   theme: 'system' | 'light' | 'dark';
   service: 'openai' | 'grok' | 'claude' | 'gemini';
-  model: string;
   prompt: string;
   newtab: boolean;
   buttonPosition: string;
@@ -38,7 +37,7 @@ export interface ThemeColors {
 export interface ConfigItem {
   label: string;
   key: string | boolean;
-  type: 'theme' | 'service' | 'model' | 'newtab' | 'position';
+  type: 'theme' | 'service' | 'newtab' | 'position';
   isActive: boolean;
 }
 

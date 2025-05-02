@@ -14,6 +14,7 @@ This project is a repository for developing a Tampermonkey script that summarize
   - Google Grok
   - Anthropic Claude
   - Google Gemini
+- **No API key required** - Uses built-in AI capabilities
 - Customizable prompts with variables support:
   - {title} - Page title
   - {content} - Page content
@@ -111,7 +112,6 @@ src/                          # Source directory
 
 - Custom prompt templates with variable support
 - Summary display preferences (new tab/current tab)
-- Model selection per AI service
 - UI theme customization
 
 ## Development

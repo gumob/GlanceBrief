@@ -4,7 +4,6 @@
 
 - TypeScript: ^5
 - Node.js: ^20.17.31
-- **AI Model: claude-3-7-sonnet-20250219 (Anthropic Messages API 2023-06-01) ← Version change prohibited**
 
 ## Frontend
 
@@ -62,6 +61,6 @@
 
 ### AI Integration
 
-- AI model version must be strictly maintained
+- Uses built-in AI capabilities
+- No external API keys required
 - Custom prompt template support
-- Multiple AI service provider support
