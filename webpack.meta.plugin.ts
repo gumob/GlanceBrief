@@ -29,10 +29,10 @@ export class UserscriptMetaPlugin {
 
     /* バージョン番号の更新 */
     if (process.env.APP_VERSION) {
-      processedBlock = processedBlock.replace(
-        /(\/\/ @version\s+).*$/m,
-        `$1${process.env.APP_VERSION}`
-      );
+      const version = isDev
+        ? process.env.APP_VERSION
+        : process.env.APP_VERSION.split('.').slice(0, -1).join('.');
+      processedBlock = processedBlock.replace(/(\/\/ @version\s+).*$/m, `$1${version}`);
     }
 
     /* 開発環境では、URLを修正 */
