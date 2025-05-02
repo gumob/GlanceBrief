@@ -35,10 +35,8 @@ const devConfig = {
 
 const prodConfig = {
   ...baseConfig,
-  downloadURL:
-    'https://raw.githubusercontent.com/gumob/GlanceBrief/refs/heads/main/dist/prod/glancebrief.user.js',
-  updateURL:
-    'https://raw.githubusercontent.com/gumob/GlanceBrief/refs/heads/main/dist/prod/glancebrief.meta.js',
+  downloadURL: 'https://github.com/gumob/GlanceBrief/raw/main/dist/prod/glancebrief.user.js',
+  updateURL: 'https://github.com/gumob/GlanceBrief/raw/main/dist/prod/glancebrief.meta.js',
 };
 
 module.exports = isDev ? devConfig : prodConfig;
