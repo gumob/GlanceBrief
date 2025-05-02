@@ -2,7 +2,6 @@ const isDev = process.env.NODE_ENV === 'development';
 const version = process.env.APP_VERSION || '0.0.1.0';
 
 const baseConfig = {
-  name: 'GlanceBrief: Instant Multi-AI Article Summarizer',
   namespace: 'https://github.com/gumob/GlanceBrief',
   version: version,
   description: 'Instant multi-AI article summarizer',
@@ -29,12 +28,14 @@ const baseConfig = {
 
 const devConfig = {
   ...baseConfig,
+  name: 'GlanceBrief (Dev): Instant Multi-AI Article Summarizer',
   downloadURL: 'http://localhost:8080/dist/dev/glancebrief.user.js',
   updateURL: 'http://localhost:8080/dist/dev/glancebrief.meta.js',
 };
 
 const prodConfig = {
   ...baseConfig,
+  name: 'GlanceBrief: Instant Multi-AI Article Summarizer',
   downloadURL: 'https://github.com/gumob/GlanceBrief/raw/main/dist/prod/glancebrief.user.js',
   updateURL: 'https://github.com/gumob/GlanceBrief/raw/main/dist/prod/glancebrief.meta.js',
 };
