@@ -38,48 +38,56 @@ This project is a repository for developing a Tampermonkey script that summarize
 pnpm install
 ```
 
+### Development
+
+```bash
+# Start development server with hot reload
+pnpm dev
+
+# Run linting
+pnpm lint
+
+# Run formatting
+pnpm format
+```
+
 ### Building the Tampermonkey Script
 
 ```bash
+# Build for production
 pnpm build
+
+# Build for development
+pnpm build:dev
 ```
 
-Running this command will generate a `glancebrief.user.js` file in the project's root directory using webpack-monkey.
+The build process will generate the userscript in the `dist` directory.
 
-## File Structure
+## Project Structure
 
 ```
-├── src/                            # Source code
-│   ├── components/                 # UI component modules
-│   │   ├── app.ts                  # Main application module
-│   │   ├── config-button.ts        # Config button component
-│   │   ├── config-dropdown.ts      # Settings dropdown component
-│   │   └── summarize-button.ts     # Summarize button component
-│   ├── services/                   # Business logic
-│   │   ├── settings-service.ts     # Settings management
-│   │   └── summarize-service.ts    # Summarization logic
-│   ├── ui/                         # UI utilities
-│   │   └── ui-components.ts        # UI component creators
-│   ├── constants.ts                # Constants and default settings
-│   ├── index.ts                    # Entry point
-│   ├── meta.ts                     # Userscript metadata
-│   ├── styles.ts                   # Style definitions
-│   ├── types.ts                    # Type definitions
-│   └── utils.ts                    # Utility functions
-├── dist/                           # Build output directory
-├── webpack.config.ts               # Webpack configuration
-└── webpack.meta.plugin.ts          # Userscript metadata plugin
+src/                          # Source directory
+├── assets/                   # Static assets
+├── components/               # UI Components
+├── services/                 # Business logic services
+├── ui/                       # UI utilities
+├── constants.ts              # Constant values and configurations
+├── index.ts                  # Entry point
+├── meta.ts                   # Userscript metadata
+├── styles.ts                # CSS styles
+├── types.ts                 # Type definitions
+└── utils.ts                 # Utility functions
 ```
 
 ## Settings
 
-### Theme
+### Theme Options
 
 - System (follows system preference)
 - Light
 - Dark
 
-### AI Service
+### AI Service Configuration
 
 - OpenAI ChatGPT
 - Google Grok
@@ -99,11 +107,31 @@ Running this command will generate a `glancebrief.user.js` file in the project's
 - Bottom Center
 - Bottom Right
 
-### Other Settings
+### Customization Options
 
-- Custom prompt template with variable support
-- Option to open summaries in new tab
-- Model selection (depending on service)
+- Custom prompt templates with variable support
+- Summary display preferences (new tab/current tab)
+- Model selection per AI service
+- UI theme customization
+
+## Development
+
+### Scripts
+
+- `pnpm dev`: Start development server
+- `pnpm build`: Production build
+- `pnpm build:dev`: Development build
+- `pnpm lint`: Run ESLint
+- `pnpm format`: Run Prettier
+- `pnpm clean`: Clean build artifacts
+
+### Technology Stack
+
+For detailed information about the technology stack, please refer to [TECHNOLOGSTACK.md](./TECHNOLOGSTACK.md).
+
+### Directory Structure
+
+For detailed information about the project structure, please refer to [DIRECTORYSTRUCTURE.md](./DIRECTORYSTRUCTURE.md).
 
 ## License
 
