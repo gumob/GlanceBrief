@@ -6,7 +6,7 @@ import { initializeApp } from '@/components/app';
 import { BUTTON_CONTAINER_ID, SETTINGS_KEYS } from '@/constants';
 import { applyTheme } from '@/styles';
 
-/* HMR用の型定義 */
+/* Type definition for HMR */
 declare const module: {
   hot?: {
     accept(path: string, callback: () => void): void;

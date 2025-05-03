@@ -24,7 +24,7 @@ import {
 export const createConfigScreen = (settings: Settings, onClose: () => void): HTMLDivElement => {
   // Update active states based on current settings
   const updateActiveStates = (settingKey: string, newValue: string | boolean): void => {
-    // 修正: 同じtypeのボタンのみリセット対象とする
+    // Fix: Only reset buttons of the same type
     const sameTypeButtons = card.querySelectorAll(
       `.glancebrief-config-item[data-type="${settingKey}"]`
     );
@@ -42,7 +42,7 @@ export const createConfigScreen = (settings: Settings, onClose: () => void): HTM
     // Set active state for the selected button
     let selector = '';
     if (settingKey === SETTINGS_KEYS.NEWTAB) {
-      // newtabの場合は特別処理 - boolean値をstring化して検索
+      // Special handling for newtab - convert boolean to string for selector
       selector = `.glancebrief-config-item[data-key="${String(newValue)}"][data-type="${settingKey}"]`;
     } else {
       selector = `.glancebrief-config-item[data-key="${newValue}"][data-type="${settingKey}"]`;
@@ -110,7 +110,7 @@ export const createConfigScreen = (settings: Settings, onClose: () => void): HTM
         });
         document.dispatchEvent(event);
 
-        // すべての設定変更は単純にUIを更新するだけ
+        // All setting changes just update the UI simply
         updateActiveStates(settingKey, newValue);
       }
     } catch (error) {
@@ -408,7 +408,7 @@ export const createConfigScreen = (settings: Settings, onClose: () => void): HTM
   positionHeader.textContent = 'Button Position';
   positionSection.appendChild(positionHeader);
 
-  // ポジション選択をドロップダウンに変更
+  // Change position selection to dropdown
   const positionOptions = [
     { value: BUTTON_POSITIONS.TOP_LEFT, label: 'Top Left' },
     { value: BUTTON_POSITIONS.TOP_CENTER, label: 'Top Center' },

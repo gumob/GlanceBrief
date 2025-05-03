@@ -12,21 +12,21 @@ export class VersionIncrementPlugin {
 
   private async updateVersion(): Promise<void> {
     try {
-      /* バージョンファイルの読み込み */
+      /* Read version file */
       const versionPath = path.resolve(this.versionFile);
       const versionData = JSON.parse(await fs.promises.readFile(versionPath, 'utf8'));
 
-      /* ビルド番号のインクリメント */
+      /* Increment build number */
       versionData.build += 1;
 
-      /* バージョン文字列の生成 */
+      /* Generate version string */
       const fullVersion = `${versionData.version}.${versionData.build}`;
       console.debug(`[GlanceBrief][VersionIncrementPlugin] New version: ${fullVersion}`);
 
-      /* バージョンファイルの更新 */
+      /* Update version file */
       await fs.promises.writeFile(versionPath, JSON.stringify(versionData, null, 2), 'utf8');
 
-      /* 環境変数にバージョン情報を設定 */
+      /* Set version info to environment variable */
       process.env.APP_VERSION = fullVersion;
     } catch (error) {
       console.error('[VersionIncrementPlugin] Error:', error);
@@ -34,15 +34,15 @@ export class VersionIncrementPlugin {
   }
 
   apply(compiler: Compiler): void {
-    /* 本番ビルド用のフック */
+    /* Hook for production build */
     compiler.hooks.beforeRun.tapAsync('VersionIncrementPlugin', async (compilation, callback) => {
       await this.updateVersion();
       callback();
     });
 
-    /* 開発環境のホットリロード用のフック */
+    /* Hook for hot reload in development environment */
     compiler.hooks.watchRun.tapAsync('VersionIncrementPlugin', async (compilation, callback) => {
-      /* 初回実行時のみバージョンを更新 */
+      /* Update version only on first run */
       if (this.isFirstRun) {
         await this.updateVersion();
         this.isFirstRun = false;
@@ -50,10 +50,10 @@ export class VersionIncrementPlugin {
       callback();
     });
 
-    /* ファイル変更時のフック */
+    /* Hook for file change */
     compiler.hooks.invalid.tap('VersionIncrementPlugin', () => {
       if (!this.isFirstRun) {
-        /* ホットリロード時のバージョン更新 */
+        /* Update version on hot reload */
         this.updateVersion().catch(error => {
           console.error('[VersionIncrementPlugin] Error during hot reload:', error);
         });

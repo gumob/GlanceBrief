@@ -27,7 +27,7 @@ export class UserscriptMetaPlugin {
 
     let processedBlock = metaBlock[0];
 
-    /* バージョン番号の更新 */
+    /* Update version number */
     if (process.env.APP_VERSION) {
       const version = isDev
         ? process.env.APP_VERSION
@@ -35,7 +35,7 @@ export class UserscriptMetaPlugin {
       processedBlock = processedBlock.replace(/(\/\/ @version\s+).*$/m, `$1${version}`);
     }
 
-    /* 開発環境では、URLを修正 */
+    /* In development environment, fix URL */
     if (isDev) {
       processedBlock = processedBlock.replace(
         /(\/\/ @(?:update|download)URL\s+http:\/\/localhost:8080\/)(?:.*?)(glancebrief\..*?\.js)/g,
@@ -51,7 +51,7 @@ export class UserscriptMetaPlugin {
     const isDev = compilation.options.mode === 'development';
     const outputDir = isDev ? 'dist/dev' : 'dist/prod';
 
-    /* ファイルパスの構築 */
+    /* Build file path */
     const userscriptPath = path.join(outputPath, this.getFilename(compilation));
     const metafilePath = path.join(outputPath, this.options.metafile);
 
@@ -62,7 +62,7 @@ export class UserscriptMetaPlugin {
       `[UserscriptMetaPlugin] Current version: ${process.env.APP_VERSION || 'unknown'}`
     );
 
-    /* ファイルの存在確認 */
+    /* Check file existence */
     if (!fs.existsSync(userscriptPath)) {
       console.debug(
         `[GlanceBrief][UserscriptMetaPlugin] Userscript file not found: ${userscriptPath}`
@@ -70,16 +70,16 @@ export class UserscriptMetaPlugin {
       return;
     }
 
-    /* ユーザースクリプトファイルからメタデータを抽出 */
+    /* Extract metadata from userscript file */
     const content = await fs.promises.readFile(userscriptPath, 'utf8');
     const processedMetaBlock = this.getMetadataBlock(content, isDev, outputDir);
 
     if (processedMetaBlock) {
-      /* メタファイルに書き込み */
+      /* Write to meta file */
       await fs.promises.writeFile(metafilePath, processedMetaBlock, 'utf8');
       console.debug(`[GlanceBrief][UserscriptMetaPlugin] Meta file generated: ${metafilePath}`);
 
-      /* ユーザースクリプトファイルのメタデータも更新 */
+      /* Also update metadata in userscript file */
       const updatedContent = content.replace(
         /\/\/ ==UserScript==[\s\S]*?\/\/ ==\/UserScript==/,
         processedMetaBlock
@@ -94,7 +94,7 @@ export class UserscriptMetaPlugin {
   }
 
   apply(compiler: Compiler): void {
-    /* 本番ビルド用のフック */
+    /* Hook for production build */
     compiler.hooks.afterEmit.tapAsync('UserscriptMetaPlugin', async (compilation, callback) => {
       try {
         await this.updateMetadata(compilation);
@@ -105,7 +105,7 @@ export class UserscriptMetaPlugin {
       }
     });
 
-    /* 開発環境のホットリロード用のフック */
+    /* Hook for hot reload in development environment */
     compiler.hooks.afterCompile.tapAsync('UserscriptMetaPlugin', async (compilation, callback) => {
       if (compilation.options.mode === 'development') {
         try {

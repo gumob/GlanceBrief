@@ -308,7 +308,7 @@ export const injectStyles = (): void => {
       opacity: 0;
     }
 
-    /* アイコン用クラス */
+    /* Class for icon */
     .glancebrief-toast-icon {
       width: 1.5em;
       height: 1.5em;

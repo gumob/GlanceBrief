@@ -84,7 +84,7 @@ export const createSelect = (options: SelectOptions): HTMLSelectElement => {
     select.id = options.id;
   }
 
-  // データ属性を設定
+  // Set data attributes
   if (options['data-key']) {
     select.setAttribute('data-key', options['data-key']);
   }
@@ -92,19 +92,19 @@ export const createSelect = (options: SelectOptions): HTMLSelectElement => {
     select.setAttribute('data-type', options['data-type']);
   }
 
-  // 選択肢を追加
+  // Add options
   options.options.forEach(opt => {
     const option = document.createElement('option');
     option.value = opt.value;
     option.textContent = opt.label;
-    // 現在の値と一致する場合は選択状態にする
+    // Set selected if matches current value
     if (options.value === opt.value) {
       option.selected = true;
     }
     select.appendChild(option);
   });
 
-  // イベントハンドラを設定
+  // Set event handler
   if (options.onChange) {
     select.addEventListener('change', options.onChange);
   }
@@ -281,7 +281,7 @@ export const showToast = (type: 'success' | 'error' | 'loading', message: string
 
   document.body.appendChild(toast);
 
-  // フェードイン（アニメーション）
+  // Fade in (animation)
   requestAnimationFrame(() => {
     toast.classList.add('glancebrief-toast-show');
   });

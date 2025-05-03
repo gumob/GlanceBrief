@@ -17,7 +17,7 @@ const config = (env: any, argv: { mode?: string }): WebpackConfiguration => {
   const filename = 'glancebrief.user.js';
   const metafile = 'glancebrief.meta.js';
 
-  // webpack-monkeyプラグイン用の基本設定
+  // Basic settings for webpack-monkey plugin
   const monkeyConfig = {
     entry: './src/index.ts',
     output: {
@@ -27,7 +27,7 @@ const config = (env: any, argv: { mode?: string }): WebpackConfiguration => {
     },
   };
 
-  // 基本設定
+  // Basic settings
   const baseConfig: WebpackConfiguration = {
     mode: mode as 'development' | 'production',
     resolve: {
@@ -55,7 +55,7 @@ const config = (env: any, argv: { mode?: string }): WebpackConfiguration => {
         new TerserPlugin({
           terserOptions: {
             format: {
-              comments: true, // メタデータブロックを保持するために必要
+              comments: true /* Required to preserve metadata block */,
             },
           },
           extractComments: false,
@@ -71,7 +71,7 @@ const config = (env: any, argv: { mode?: string }): WebpackConfiguration => {
     ],
   };
 
-  // webpack-monkeyプラグインを適用
+  // Apply webpack-monkey plugin
   const config = monkey({
     ...baseConfig,
     ...monkeyConfig,
