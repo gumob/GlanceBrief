@@ -81,7 +81,7 @@ const config = (env: any, argv: { mode?: string }): WebpackConfiguration => {
     },
     devtool: isDev ? ('inline-source-map' as const) : false,
     plugins: [
-      new VersionIncrementPlugin('version.json'),
+      new VersionIncrementPlugin('package.json'),
       new UserscriptMetaPlugin({
         metafile,
       }),

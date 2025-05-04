@@ -29,9 +29,11 @@ export class UserscriptMetaPlugin {
 
     /* Update version number */
     if (process.env.APP_VERSION) {
-      const version = isDev
-        ? process.env.APP_VERSION
-        : process.env.APP_VERSION.split('.').slice(0, -1).join('.');
+      let version = process.env.APP_VERSION;
+      if (!isDev) {
+        // prod: バージョン番号のみ（例: 1.2.3）
+        version = version.split('.').slice(0, 3).join('.');
+      }
       processedBlock = processedBlock.replace(/(\/\/ @version\s+).*$/m, `$1${version}`);
     }
 

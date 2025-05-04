@@ -10,23 +10,29 @@ export class VersionIncrementPlugin {
     this.versionFile = versionFile;
   }
 
-  private async updateVersion(): Promise<void> {
+  private async updateVersion(isDev: boolean): Promise<void> {
     try {
-      /* Read version file */
-      const versionPath = path.resolve(this.versionFile);
-      const versionData = JSON.parse(await fs.promises.readFile(versionPath, 'utf8'));
+      const packagePath = path.resolve('package.json');
+      const packageData = JSON.parse(await fs.promises.readFile(packagePath, 'utf8'));
+      const prevVersion = packageData.version;
+      let build = 0;
+      let fullVersion = prevVersion;
 
-      /* Increment build number */
-      versionData.build += 1;
+      if (isDev) {
+        // dev: use .dev_build_number (local only)
+        const buildFile = path.resolve('.dev_build_number');
+        if (fs.existsSync(buildFile)) {
+          build = parseInt((await fs.promises.readFile(buildFile, 'utf8')).trim(), 10) || 0;
+        }
+        build += 1;
+        await fs.promises.writeFile(buildFile, build.toString(), 'utf8');
+        fullVersion = `${prevVersion}.${build}`;
+      } else {
+        // prod: version only (no build number)
+        fullVersion = prevVersion;
+      }
 
-      /* Generate version string */
-      const fullVersion = `${versionData.version}.${versionData.build}`;
       console.debug(`[GlanceBrief][VersionIncrementPlugin] New version: ${fullVersion}`);
-
-      /* Update version file */
-      await fs.promises.writeFile(versionPath, JSON.stringify(versionData, null, 2), 'utf8');
-
-      /* Set version info to environment variable */
       process.env.APP_VERSION = fullVersion;
     } catch (error) {
       console.error('[VersionIncrementPlugin] Error:', error);
@@ -36,15 +42,20 @@ export class VersionIncrementPlugin {
   apply(compiler: Compiler): void {
     /* Hook for production build */
     compiler.hooks.beforeRun.tapAsync('VersionIncrementPlugin', async (compilation, callback) => {
-      await this.updateVersion();
+      const isDev =
+        process.env.NODE_ENV === 'development' ||
+        (compilation.options && compilation.options.mode === 'development');
+      await this.updateVersion(isDev);
       callback();
     });
 
     /* Hook for hot reload in development environment */
     compiler.hooks.watchRun.tapAsync('VersionIncrementPlugin', async (compilation, callback) => {
-      /* Update version only on first run */
       if (this.isFirstRun) {
-        await this.updateVersion();
+        const isDev =
+          process.env.NODE_ENV === 'development' ||
+          (compilation.options && compilation.options.mode === 'development');
+        await this.updateVersion(isDev);
         this.isFirstRun = false;
       }
       callback();
@@ -53,8 +64,8 @@ export class VersionIncrementPlugin {
     /* Hook for file change */
     compiler.hooks.invalid.tap('VersionIncrementPlugin', () => {
       if (!this.isFirstRun) {
-        /* Update version on hot reload */
-        this.updateVersion().catch(error => {
+        const isDev = process.env.NODE_ENV === 'development';
+        this.updateVersion(isDev).catch(error => {
           console.error('[VersionIncrementPlugin] Error during hot reload:', error);
         });
       }
