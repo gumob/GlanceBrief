@@ -34,5 +34,5 @@ jobs:
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          git add dist/prod/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update userscript build [skip ci]" && git push)
+          git add dist/prod/ pnpm-lock.yaml
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update userscript build and lockfile [skip ci]" && git push)
