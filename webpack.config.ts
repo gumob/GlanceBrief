@@ -55,8 +55,25 @@ const config = (env: any, argv: { mode?: string }): WebpackConfiguration => {
         new TerserPlugin({
           terserOptions: {
             format: {
-              comments: true /* Required to preserve metadata block */,
+              comments: (node, comment) => {
+                // Only preserve Tampermonkey metadata block
+                const metaStart = /^ ==UserScript==/;
+                const metaEnd = /^ ==\/UserScript==/;
+                if (comment.type === 'comment2') {
+                  if (metaStart.test(comment.value) || metaEnd.test(comment.value)) {
+                    return true;
+                  }
+                }
+                return false;
+              },
             },
+            mangle: !isDev /* Enable mangle (obfuscation) in prod */,
+            compress: !isDev
+              ? {
+                  drop_console: true,
+                  drop_debugger: true,
+                }
+              : false /* Enable compression in prod, drop console */,
           },
           extractComments: false,
         }),
@@ -107,7 +124,7 @@ const config = (env: any, argv: { mode?: string }): WebpackConfiguration => {
       open: true,
       devMiddleware: {
         writeToDisk: true,
-        stats: 'minimal',
+        stats: 'minimal' as const,
       },
       client: {
         overlay: false,
