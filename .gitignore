@@ -33,5 +33,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
+# Cursor
+.cursor
+
 # dev build number (local only)
 .dev_build_number

@@ -1,6 +1,6 @@
 # GlanceBrief
 
-A userscript that adds AI-powered summarization to any webpage. Uses OpenAI's ChatGPT, Google's Grok, Anthropic's Claude, or Google's Gemini with custom prompts.
+A userscript that adds AI-powered summarization to any webpage. Uses ChatGPT, Grok, Claude, or Gemini with custom prompts.
 
 ## Overview
 
@@ -10,10 +10,10 @@ This project is a repository for developing a Tampermonkey script that summarize
 
 - Single floating button for AI summarization
 - Support for multiple AI services:
-  - OpenAI ChatGPT
-  - Google Grok
-  - Anthropic Claude
-  - Google Gemini
+  - ChatGPT
+  - Grok
+  - Claude
+  - Gemini
 - **No API key required** - Uses built-in AI capabilities
 - Customizable prompts with variables support:
   - {title} - Page title
@@ -23,8 +23,19 @@ This project is a repository for developing a Tampermonkey script that summarize
   - System (follows system preference)
   - Light mode
   - Dark mode
+- Custom prompt templates with variable support
+- Summary display preferences (new tab/current tab)
 - Configurable button position (8 positions)
+  - Top Left
+  - Top Center
+  - Top Right
+  - Middle Left
+  - Middle Right
+  - Bottom Left
+  - Bottom Center
+  - Bottom Right
 - Option to open summaries in new tab or current tab
+- UI theme customization
 
 ## Development Environment Setup
 
@@ -59,7 +70,7 @@ pnpm format
 pnpm build
 
 # Build for development
-pnpm build:dev
+pnpm dev
 ```
 
 The build process will generate the userscript in the `dist` directory.
@@ -67,63 +78,32 @@ The build process will generate the userscript in the `dist` directory.
 ## Project Structure
 
 ```
-src/                          # Source directory
-├── assets/                   # Static assets
-├── components/               # UI Components
-├── services/                 # Business logic services
-├── ui/                       # UI utilities
-├── constants.ts              # Constant values and configurations
-├── index.ts                  # Entry point
-├── meta.ts                   # Userscript metadata
+src/                         # Source directory
+├── assets/                  # Static assets
+├── components/              # UI Components
+├── services/                # Business logic services
+├── ui/                      # UI utilities
+├── constants.ts             # Constant values and configurations
+├── index.ts                 # Entry point
+├── meta.ts                  # Userscript metadata
 ├── styles.ts                # CSS styles
 ├── types.ts                 # Type definitions
 └── utils.ts                 # Utility functions
 ```
-
-## Settings
-
-### Theme Options
-
-- System (follows system preference)
-- Light
-- Dark
-
-### AI Service Configuration
-
-- OpenAI ChatGPT
-- Google Grok
-- Anthropic Claude
-- Google Gemini
-
-### Button Position
-
-8 configurable positions:
-
-- Top Left
-- Top Center
-- Top Right
-- Middle Left
-- Middle Right
-- Bottom Left
-- Bottom Center
-- Bottom Right
-
-### Customization Options
-
-- Custom prompt templates with variable support
-- Summary display preferences (new tab/current tab)
-- UI theme customization
 
 ## Development
 
 ### Scripts
 
 - `pnpm dev`: Start development server
+- `pnpm dev:watch`: Start development server with watch mode
 - `pnpm build`: Production build
-- `pnpm build:dev`: Development build
-- `pnpm lint`: Run ESLint
-- `pnpm format`: Run Prettier
-- `pnpm clean`: Clean build artifacts
+- `pnpm format-check`: Check code formatting with Prettier
+- `pnpm format-fix`: Fix code formatting with Prettier
+- `pnpm eslint-check`: Check code with ESLint
+- `pnpm eslint-fix`: Fix code with ESLint
+- `pnpm format:all`: Fix both code formatting and ESLint issues
+- `pnpm clean-install-modules`: Clean install dependencies with pnpm
 
 ### Technology Stack
 
@@ -135,7 +115,7 @@ For detailed information about the project structure, please refer to [DIRECTORY
 
 ## License
 
-MIT
+GlanceBriefe is released under MIT license, which means you can modify it, redistribute it or use it however you like.
 
 ## Author
 
