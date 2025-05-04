@@ -1,6 +1,6 @@
 # GlanceBrief
 
-A userscript that adds AI-powered summarization to any webpage. Uses OpenAI's ChatGPT, Google's Grok, Anthropic's Claude, or Google's Gemini with custom prompts.
+A userscript that adds AI-powered summarization to any webpage. Uses ChatGPT, Grok, Claude, or Gemini with custom prompts.
 
 ## Overview
 
@@ -96,11 +96,14 @@ src/                         # Source directory
 ### Scripts
 
 - `pnpm dev`: Start development server
+- `pnpm dev:watch`: Start development server with watch mode
 - `pnpm build`: Production build
-- `pnpm build:dev`: Development build
-- `pnpm lint`: Run ESLint
-- `pnpm format`: Run Prettier
-- `pnpm clean`: Clean build artifacts
+- `pnpm format-check`: Check code formatting with Prettier
+- `pnpm format-fix`: Fix code formatting with Prettier
+- `pnpm eslint-check`: Check code with ESLint
+- `pnpm eslint-fix`: Fix code with ESLint
+- `pnpm format:all`: Fix both code formatting and ESLint issues
+- `pnpm clean-install-modules`: Clean install dependencies with pnpm
 
 ### Technology Stack
 
